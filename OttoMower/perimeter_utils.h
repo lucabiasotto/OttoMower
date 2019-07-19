@@ -3,10 +3,10 @@
  */
 
 const int US_FRONT_TRIG = 2;
-const int US_FRONT_ECHO = 3;
+const int US_FRONT_ECHO = 8;
 const int US_LEFT_TRIG = 4;
-const int US_LEFT_ECHO = 5;
-const int US_RIGHT_TRIG = 6;
+const int US_LEFT_ECHO = 12;
+const int US_RIGHT_TRIG = 13;
 const int US_RIGHT_ECHO = 7;
 
 

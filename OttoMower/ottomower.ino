@@ -20,6 +20,7 @@ float rightDistance;
 const float FRONT_LIMIT_CM = 20;
 const float LEFT_LIMIT_CM = 5;
 const float RIGHT_LIMIT_CM = 5;
+const float DEGREE_FOR_DODGE = 10;
 
 const float TURN_LIMIT_CM = 40; // larghezza robot
 
@@ -41,15 +42,20 @@ void setup() {
   pinMode(US_RIGHT_TRIG, OUTPUT);
   pinMode(US_RIGHT_ECHO, INPUT);
 
-  //right BTS7960
-  pinMode(RIGHT_EN, OUTPUT);
-  pinMode(RIGHT_IN1, OUTPUT);
-  pinMode(RIGHT_IN2, OUTPUT);
 
   //left BTS7960
-  pinMode(LEFT_EN, OUTPUT);
-  pinMode(LEFT_IN1, OUTPUT);
-  pinMode(LEFT_IN2, OUTPUT);
+  pinMode(LEFT_RPWM, OUTPUT);
+  pinMode(LEFT_LPWM, OUTPUT);
+  digitalWrite(LEFT_LPWM, LOW);
+  digitalWrite(LEFT_RPWM, LOW);
+
+  //right BTS7960
+  pinMode(RIGHT_RPWM, OUTPUT);
+  pinMode(RIGHT_LPWM, OUTPUT);
+  digitalWrite(RIGHT_LPWM, LOW);
+  digitalWrite(RIGHT_RPWM, LOW);
+
+
 
   Serial.println("Initialize MPU6050");
 
@@ -126,6 +132,8 @@ void loop() {
         CHECK IF MOWER CAN GO 
    ******************************/
 
+   //TODO check Pitch/Roll and stop mower
+
   if (canGo()) {
     //mower can go straight
     forward(yaw);
@@ -140,15 +148,12 @@ void loop() {
 
       if(frontDistance > FRONT_LIMIT_CM && leftDistance < LEFT_LIMIT_CM){
        // front is free, no space to left side
-
-        //TODO
-        //forward(50);
+       forward(DEGREE_FOR_DODGE);
        
       }else if(frontDistance > FRONT_LIMIT_CM && rightDistance < RIGHT_LIMIT_CM){
-      // front is free, no space to right side
+        // front is free, no space to right side
 
-        //TODO
-        //forward(-50);
+        forward(360 - DEGREE_FOR_DODGE);
       
       }else if (leftDistance < TURN_LIMIT_CM && rightDistance < TURN_LIMIT_CM) {
         //no space left or right --> go back
@@ -227,5 +232,12 @@ boolean canGo(){
   leftDistance = getLeftDistance();
   rightDistance = getRightDistance();
 
-  return frontDistance > FRONT_LIMIT_CM && leftDistance > LEFT_LIMIT_CM && rightDistance > RIGHT_LIMIT_CM;
+  bool canGo = (frontDistance < 0 || frontDistance > FRONT_LIMIT_CM) 
+                  && (leftDistance < 0 || leftDistance > LEFT_LIMIT_CM)
+                  && (rightDistance <0 || rightDistance > RIGHT_LIMIT_CM); 
+  
+  Serial.print("canGo: ");
+  Serial.println(canGo);
+
+  return canGo;
 }
