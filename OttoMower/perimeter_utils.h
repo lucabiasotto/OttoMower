@@ -10,6 +10,7 @@ const int US_RIGHT_TRIG = 13;
 const int US_RIGHT_ECHO = 7;
 
 
+
 /**
  * return the distance for the passed HC-SR04 pin
  */

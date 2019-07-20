@@ -1,6 +1,7 @@
 /**
-   Classe for control motors
-*/
+ * Classe for control motors
+ * Mower motos use 2 BTS7960
+ */
 
 //left motor
 const int LEFT_LPWM= 5; // +5V left motor reverse rotation
@@ -50,6 +51,15 @@ void forward(float currentAngle) {
 
     leftPower = 255 - (255*currentAngle) / 90;
   }
+
+  /*
+  //DEGUB while turn
+  if(rightPower != 255 || leftPower != 255){
+    digitalWrite(9, HIGH);
+    delay(100);
+    digitalWrite(9, LOW);
+  }
+  */
 
   Serial.print("currentAngle = ");
   Serial.print(currentAngle);

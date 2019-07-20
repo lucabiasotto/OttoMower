@@ -2,7 +2,7 @@
 #include "perimeter_utils.h"
 
 #include <Wire.h> //need by MPU6050
-#include <MPU6050.h>//MPU6050byLC24 library by http://www.jarzebski.pl/arduino/czujniki-i-sensory/3-osiowy-zyroskop-i-akcelerometr-mpu6050.html
+#include <MPU6050.h>//MPU6050byLC24 library by https://github.com/jarzebski/Arduino-MPU6050
 
 MPU6050 mpu;
 
@@ -24,11 +24,23 @@ const float DEGREE_FOR_DODGE = 10;
 
 const float TURN_LIMIT_CM = 40; // larghezza robot
 
+const int BUZZER = 9;
+
+unsigned int   resetCount __attribute__ ((section (".noinit")));  
+
+
+/**
+ * Function for reset arduino
+ */
+void(* reset)(void) = 0;
 
 
 void setup() {
 
   Serial.begin(9600);
+
+  pinMode(BUZZER, OUTPUT);
+
 
   //front HC-SR04
   pinMode(US_FRONT_TRIG, OUTPUT);
@@ -55,14 +67,22 @@ void setup() {
   digitalWrite(RIGHT_LPWM, LOW);
   digitalWrite(RIGHT_RPWM, LOW);
 
-
+  digitalWrite(BUZZER, HIGH);
+  delay(100);
+  digitalWrite(BUZZER, LOW);
+  delay(100);
+  digitalWrite(BUZZER, HIGH);
+  delay(100);
+  digitalWrite(BUZZER, LOW);
 
   Serial.println("Initialize MPU6050");
 
   while (!mpu.begin(MPU6050_SCALE_2000DPS, MPU6050_RANGE_2G))
   {
     Serial.println("Could not find a valid MPU6050 sensor, check wiring!");
+    digitalWrite(BUZZER, HIGH);
     delay(500);
+    digitalWrite(BUZZER, LOW);
   }
 
   // Calibrate gyroscope. The calibration must be at rest.
@@ -75,6 +95,33 @@ void setup() {
 
   // Check settings
   checkSettings();
+
+  Vector normGyro = mpu.readNormalizeGyro();
+  int zAxis = normGyro.ZAxis;
+
+  
+
+  if(resetCount == 1){ 
+    // 1 is the magic number used to flag when i'm after a reset
+    Serial.println("AFTER RESET"); 
+    digitalWrite(BUZZER, HIGH);
+    delay(500);
+    digitalWrite(BUZZER, LOW);
+  }else{
+    //i need to do a reset because sometimes the MPU6050 not works at first boot
+    Serial.print("FIRST POWER UP");
+    resetCount = 1;
+    digitalWrite(BUZZER, HIGH);
+    delay(100);
+    digitalWrite(BUZZER, LOW);
+    delay(100);
+    digitalWrite(BUZZER, HIGH);
+    delay(100);
+    digitalWrite(BUZZER, LOW);
+    delay(100);
+    reset();
+  }
+  resetCount = 1;
 }
 
 void loop() {
@@ -85,11 +132,12 @@ void loop() {
   }
   lastLoopRunningMS = millis();
   
-
   /******************************
         GET MOWER POSITION
    ******************************/
 
+  
+ 
   // Read normalized values
   Vector normAccel = mpu.readNormalizeAccel();
   Vector normGyro = mpu.readNormalizeGyro();
@@ -102,10 +150,10 @@ void loop() {
   if (normGyro.ZAxis > 1 || normGyro.ZAxis < -1) {
     //normGyro.ZAxis /= 100; // /100 because the delay is 10ms
 
-    normGyro.ZAxis /= (1000 / loopDelay);
-    
+    normGyro.ZAxis = normGyro.ZAxis / (1000 / loopDelay);
     yaw += normGyro.ZAxis;
   }
+
 
   //Keep our angle between 0-359 degrees
   if (yaw < 0) {
@@ -132,7 +180,23 @@ void loop() {
         CHECK IF MOWER CAN GO 
    ******************************/
 
-   //TODO check Pitch/Roll and stop mower
+  if(pitch < 0 || pitch > 5 || roll > 2 || roll < -2){
+    //emergency stop
+    stop();
+    
+    for(int i=0; i<10; i++){
+      digitalWrite(BUZZER, HIGH);
+      delay(1000);
+      digitalWrite(BUZZER, LOW);
+      delay(1000);
+    }
+
+    while(true){
+      //i'm die  
+    }
+  }
+
+  
 
   if (canGo()) {
     //mower can go straight
@@ -179,16 +243,22 @@ void loop() {
 }
 
 
-
-/**
-   Check and log all settings
-*/
+/** 
+ *  Check and log all settings
+ */
 void checkSettings()
 {
   Serial.println();
 
   Serial.print(" * Sleep Mode:        ");
   Serial.println(mpu.getSleepEnabled() ? "Enabled" : "Disabled");
+
+  if(mpu.getSleepEnabled()){
+      //invalid state
+      digitalWrite(BUZZER, HIGH);
+      delay(5000);
+      reset();
+    }
 
   Serial.print(" * Clock Source:      ");
   switch (mpu.getClockSource())
@@ -200,6 +270,13 @@ void checkSettings()
     case MPU6050_CLOCK_PLL_YGYRO:      Serial.println("PLL with Y axis gyroscope reference"); break;
     case MPU6050_CLOCK_PLL_XGYRO:      Serial.println("PLL with X axis gyroscope reference"); break;
     case MPU6050_CLOCK_INTERNAL_8MHZ:  Serial.println("Internal 8MHz oscillator"); break;
+
+    if(mpu.getClockSource() != MPU6050_CLOCK_PLL_XGYRO){
+      //invalid state
+      digitalWrite(BUZZER, HIGH);
+      delay(5000);
+      reset();
+    }
   }
 
   Serial.print(" * Gyroscope:         ");
@@ -209,6 +286,13 @@ void checkSettings()
     case MPU6050_SCALE_1000DPS:        Serial.println("1000 dps"); break;
     case MPU6050_SCALE_500DPS:         Serial.println("500 dps"); break;
     case MPU6050_SCALE_250DPS:         Serial.println("250 dps"); break;
+
+    if(mpu.getScale() != MPU6050_SCALE_2000DPS){
+      //invalid state
+      digitalWrite(BUZZER, HIGH);
+      delay(5000);
+      reset();
+    }
   }
 
   Serial.print(" * Gyroscope offsets: ");
