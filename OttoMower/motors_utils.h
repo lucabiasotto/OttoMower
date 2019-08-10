@@ -12,7 +12,7 @@ const int LEFT_RPWM = 6; // +5V left motor forward rotation
 const int RIGHT_LPWM = 10; // +5V right motor reverse rotation
 const int RIGHT_RPWM = 11; // +5V right motor forward rotation
 
-const int MAX_SPEED = 255;
+const int MAX_SPEED = 200; //255;
 const int TURN_SPEED = 150;
 
 void stop() {
@@ -34,32 +34,30 @@ void forward(float currentAngle) {
   int leftPower = MAX_SPEED;
   int rightPower = MAX_SPEED;
   if(currentAngle < 180){
-    //reduce right power
+    //reduce right motor power 
     if(currentAngle > 90){
       currentAngle = 90;
     }
     
-    rightPower = 255 - (255*currentAngle) / 90;
+    rightPower = MAX_SPEED - (MAX_SPEED*currentAngle) / 90; //perfect motors balance
+
+
+    //adds some compensation, give motors the time so balance
+    rightPower = rightPower * 5 / 5;
     
   }else{
-    //reduce left power
+    //reduce left motor power
     if(currentAngle < 270){
       currentAngle = 270;
     }
 
     currentAngle = 360 - currentAngle;
 
-    leftPower = 255 - (255*currentAngle) / 90;
-  }
+    leftPower = MAX_SPEED - (MAX_SPEED*currentAngle) / 90;//perfect motors balance
 
-  /*
-  //DEGUB while turn
-  if(rightPower != 255 || leftPower != 255){
-    digitalWrite(9, HIGH);
-    delay(100);
-    digitalWrite(9, LOW);
+    //adds some compensation, give motors the time so balance
+    leftPower = leftPower * 4 / 5;
   }
-  */
 
   Serial.print("currentAngle = ");
   Serial.print(currentAngle);
@@ -85,7 +83,7 @@ void left() {
   digitalWrite(LEFT_LPWM, LOW);
   analogWrite(LEFT_RPWM, TURN_SPEED);
   
-  delay(5000);
+  delay(1500);
 }
 
 void right() {
@@ -98,7 +96,7 @@ void right() {
   digitalWrite(LEFT_RPWM, LOW);
   
 
-  delay(5000);
+  delay(1500);
 }
 
 void reverse() {
@@ -110,5 +108,5 @@ void reverse() {
   digitalWrite(LEFT_LPWM, LOW);
   analogWrite(LEFT_RPWM, TURN_SPEED);
   
-  delay(5000);
+  delay(2000);
 }
