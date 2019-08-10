@@ -2,7 +2,7 @@
 
 An Arduino Lawnmower robot implementation.
 
-**!! THE PROJECT IS A WORK IN PROGRESS, AT THE MOMENT THE BLADE WAS NOT CONNECTED !!**
+**!! THE PROJECT IS A WORK IN PROGRESS, AT THE MOMENT THE BLADE IS NOT CONNECTED/IMPLEMENTED !!**
 
 ## Feature
 - obstacle detection with 3 ultrasonic sensors
