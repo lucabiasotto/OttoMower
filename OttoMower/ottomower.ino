@@ -7,7 +7,7 @@
 MPU6050 mpu;
 
 //CAUTION!!! DISABLE_EMERGENCY_STOP only for DEBUG
-const bool DISABLE_EMERGENCY_STOP = true; //shutdown the robot if it's locked or someone tilted him
+const bool DISABLE_EMERGENCY_STOP = false; //shutdown the robot if it's locked or someone tilted him
 
 
 const float FRONT_LIMIT_CM = 40;
@@ -16,28 +16,28 @@ const float RIGHT_LIMIT_CM = 10;
 const float LEFT_LIMIT_FOR_DODGE_CM = 20;
 const float RIGHT_LIMIT_FOR_DODGE_CM = 20;
 const float DEGREE_FOR_DODGE = 45;
-const float TURN_LIMIT_CM = 60; // larghezza robot
+const float TURN_LIMIT_CM = 60; // robot width
 
 // Pitch, Roll and Yaw values
 int pitch = 0;
 int roll = 0;
 float yaw = 0;
 long lastLoopRunningMS = 0;
-const int PITCH_LIMIT = 10; //pitch limit before shutdown
-const int ROLL_LIMIT = 10; //roll limit before shutdown
-
+const int PITCH_LIMIT = 10; //10 - pitch limit before shutdown
+const int ROLL_LIMIT = 10; //10 - roll limit before shutdown
+int tiltCount = 0;
+const int TILT_LIMIT = 2;
 
 float frontDistance;
 float leftDistance;
 float rightDistance;
 
-float prevAccX = 0;
-float prevAccY = 0;
-float prevAccZ = 0;
+float forwardStartMS;
 
-int lockedStartTimeMS = 0;
-const int LOCKED_LIMIT_MS = 2000; //if not move for this time try to free the robot
-const int LOCKED_LIMIT_SHUTDOWN_MS = 20000; //if not move for this time shutdown all
+long firstLockDetectionMS = 0;
+const float LOCK_ACC_TOLLERANCE = 0.4 ; //0.1 if is very very stopped
+const int LOCKED_LIMIT_MS = 1000; //if not move for this time try to free the robot
+const int LOCKED_LIMIT_SHUTDOWN_MS = 5000 * 3; //if not move for this time shutdown all
 
 
 const int BUZZER = 9;
@@ -50,7 +50,9 @@ unsigned int   resetCount __attribute__ ((section (".noinit")));
 */
 void(* reset)(void) = 0;
 
-
+/*
+   Setup the robot
+*/
 void setup() {
 
   Serial.begin(9600);
@@ -116,7 +118,6 @@ void setup() {
   int zAxis = normGyro.ZAxis;
 
 
-
   if (resetCount == 1) {
     // 1 is the magic number used to flag when i'm after a reset
     Serial.println("AFTER RESET");
@@ -138,6 +139,7 @@ void setup() {
     reset();
   }
   resetCount = 1;
+
 }
 
 
@@ -213,15 +215,19 @@ void loop() {
   }
   lastLoopRunningMS = millis();
 
+  Serial.println("");
+
   /******************************
         GET MOWER POSITION
    ******************************/
 
-
-
   // Read normalized values
   Vector normAccel = mpu.readNormalizeAccel();
   Vector normGyro = mpu.readNormalizeGyro();
+
+  float startAccX = normAccel.XAxis;
+  float startAccY = normAccel.YAxis;
+  float startAccZ = normAccel.ZAxis;
 
   // Calculate Pitch & Roll
   pitch = -(atan2(normAccel.XAxis, sqrt(normAccel.YAxis * normAccel.YAxis + normAccel.ZAxis * normAccel.ZAxis)) * 180.0) / M_PI;
@@ -234,7 +240,6 @@ void loop() {
     normGyro.ZAxis = normGyro.ZAxis / (1000 / loopDelay);
     yaw += normGyro.ZAxis;
   }
-
 
   //Keep our angle between 0-359 degrees
   if (yaw < 0) {
@@ -268,119 +273,176 @@ void loop() {
         CHECK IF MOWER CAN GO
    ******************************/
 
+  if (pitch < -PITCH_LIMIT || pitch > PITCH_LIMIT || roll > ROLL_LIMIT || roll < -ROLL_LIMIT ) {
+    //robot is tilt
 
-  if (pitch < -PITCH_LIMIT || pitch > PITCH_LIMIT || roll > ROLL_LIMIT || roll < -ROLL_LIMIT || (millis() - lockedStartTimeMS) > LOCKED_LIMIT_SHUTDOWN_MS) {
-    //emergency stop
-    stop();
-
-    for (int i = 0; i < 10; i++) {
-      digitalWrite(BUZZER, HIGH);
-      delay(1000);
-      digitalWrite(BUZZER, LOW);
-      delay(1000);
-    }
-
-    while (true && !DISABLE_EMERGENCY_STOP) {
-      //i'm die
-    }
+    tiltCount++;
+    //TODO stop() stopBlades;
+    stop(500);
+    Serial.println("!!!! TILT DETECTED !!!!");
+  } else {
+    tiltCount = 0;
   }
 
 
-  if (canGo()) {
-    //no obstacle detected mower can go straight
+  if (tiltCount >= TILT_LIMIT) {
+    //robot is in tilt more time consecutively...shoutdown
+    //TODO stop() stopBlades;
+    stop(1);
+    Serial.println("");
+    Serial.println("!!!! MANY TILT DETECTED --> SHUTDOWN !!!!");
+    Serial.println("");
 
-    boolean robotIsLocked = false;
-
-    if (prevAccX != 0 && prevAccY != 0  && prevAccZ != 0) {
-      //check acceleration, if accelaration not chage the rover is locked
-      float tollerance = 0.1;
-      float deltaX = prevAccX - normAccel.XAxis;
-      float deltaY = prevAccY - normAccel.YAxis;
-      float deltaZ = prevAccZ - normAccel.ZAxis;
-
-      deltaX = deltaX < 0 ? -deltaX : deltaX;
-      deltaY = deltaY < 0 ? -deltaY : deltaY;
-      deltaZ = deltaZ < 0 ? -deltaZ : deltaZ;
-
-      if (deltaX < tollerance && deltaY < tollerance && deltaZ < tollerance) {
-        //the robot is locked
-        if(lockedStartTimeMS == 0){
-          lockedStartTimeMS = millis();
-        }
-
-        Serial.println("");
-        Serial.println("!!!! LOCK DETECTED !!!!");
-        Serial.println("");
-        
-        if(millis() - lockedStartTimeMS > LOCKED_LIMIT_MS){
-          robotIsLocked = true;
-        }
-
-      } else {
-        //robot is moving
-        lockedStartTimeMS = 0;
-        robotIsLocked = false;
-      }
+    for (int i = 0; i < 10; i++) {
+      digitalWrite(BUZZER, HIGH);
+      delay(100);
+      digitalWrite(BUZZER, LOW);
+      delay(100);
     }
-    prevAccX = normAccel.XAxis;
-    prevAccY = normAccel.YAxis;
-    prevAccZ = normAccel.ZAxis;
+
+    turnOffRobot();
+  }
+
+  if (firstLockDetectionMS > 0 &&  millis() - firstLockDetectionMS > LOCKED_LIMIT_SHUTDOWN_MS) {
+    //TODO stop() stopBlades;
+    stop(1);
+    Serial.println("");
+    Serial.println("!!!! LONG TIME LOCK DETECTED --> SHUTDOWN !!!!");
+    Serial.println("");
+
+    digitalWrite(BUZZER, HIGH);
+    delay(5000);
+    digitalWrite(BUZZER, LOW);
+
+    turnOffRobot();
+  }
 
 
-    if (robotIsLocked) {
-      //robot is locked, try to free it
-      stop();
-      Serial.println("LOCK DODGE");
-      reverse();
-      if (leftDistance < TURN_LIMIT_CM ) {
-        right();
+  if (tiltCount > 0) {
+    //A. robot can go, wait to see if tilt is over
+
+  } else if (canGo()) {
+    //B. no obstacle detected mower can go straight
+
+    if (forwardStartMS == 0) {
+      forwardStartMS = millis();
+    }
+
+    if (firstLockDetectionMS > 0 && millis() - firstLockDetectionMS > LOCKED_LIMIT_MS) {
+      //robot is "impantanato"
+      //TODO stopBlades
+      Serial.println("--> LOCK DODGE <--");
+      stop(900);
+      digitalWrite(BUZZER, HIGH);
+      delay(100);
+      digitalWrite(BUZZER, LOW);
+
+
+      //NB: se cambi questi tempi devi tenerne conto nel LOCKED_LIMIT_SHUTDOWN_MS
+      reverse(2000);
+      if (leftDistance < TURN_LIMIT_CM && rightDistance < TURN_LIMIT_CM) {
+        //no space left or right --> go back
+        reverse(2000);
+      } else if (leftDistance < TURN_LIMIT_CM) {
+        //no space left
+        right(2000);
+      } else if (rightDistance < TURN_LIMIT_CM) {
+        //no space right
+        left(2000);
       } else {
-        left();
+        if (random(0, 10) < 5) { //random 0-->9
+          left(2000);
+        } else {
+          right(2000);
+        }
       }
-      stop();
 
-    } else if (leftDistance < LEFT_LIMIT_FOR_DODGE_CM) {
+      yaw = 0; //reset the angle
+      lastLoopRunningMS = 0; //need for reset the angle
+
+      //robot must start, else firstLockDetectionMS is not reset
+      forward(yaw);
+    }
+    else if (leftDistance < LEFT_LIMIT_FOR_DODGE_CM) {
       //approaching obstacle from left try to doodge
-      Serial.println("LEFT DODGE");
+      Serial.println("<-- LEFT DODGE");
       forward(DEGREE_FOR_DODGE);
     } else if (rightDistance < LEFT_LIMIT_FOR_DODGE_CM) {
       //approaching obstacle from right try to doodge
-      Serial.println("RIGHT DODGE");
+      Serial.println("RIGHT DODGE -->");
       forward(360 - DEGREE_FOR_DODGE);
     } else {
       //yam is use for balance direction
       forward(yaw);
     }
 
-  } else {
-    //mower can't go straight
-    stop();
-    lockedStartTimeMS = 0;
-    
-    reverse();
 
-    //il roboto è bloccato, lo faccio andare avanti e indietro finchè c'è spazio
-    do {
 
-      if (leftDistance < TURN_LIMIT_CM && rightDistance < TURN_LIMIT_CM) {
-        //no space left or right --> go back
-        reverse();
-      } else if (leftDistance < TURN_LIMIT_CM) {
-        //no space left
-        right();
-      } else {
-        //no space right
-        left();
+    //check if robot is locked
+    normAccel = mpu.readNormalizeAccel();
+    float deltaX = startAccX - normAccel.XAxis;
+    float deltaY = startAccY - normAccel.YAxis;
+    float deltaZ = startAccZ - normAccel.ZAxis;
+    deltaX = deltaX < 0 ? -deltaX : deltaX;
+    deltaY = deltaY < 0 ? -deltaY : deltaY;
+    deltaZ = deltaZ < 0 ? -deltaZ : deltaZ;
+
+
+    Serial.print("deltaX = ");
+    Serial.print(deltaX);
+    Serial.print("\tdeltaY = ");
+    Serial.print(deltaY);
+    Serial.print("\tdeltaZ = ");
+    Serial.print(deltaZ);
+    Serial.println();
+
+
+    if ((millis() - forwardStartMS > 1000) //wait 1 secondo before get information
+        && deltaX < LOCK_ACC_TOLLERANCE && deltaY < LOCK_ACC_TOLLERANCE && deltaZ < LOCK_ACC_TOLLERANCE) {
+      //the robot is locked
+      if (firstLockDetectionMS == 0) {
+        firstLockDetectionMS = millis();
       }
 
-      stop();
-    } while (!canGo());
+      Serial.println("!!!! LOCK DETECTED !!!!");
+    } else {
+      //robot is moving
+      firstLockDetectionMS = 0;
+    }
+    //END lock check
 
 
-    //reset the angle
-    yaw = 0;
-    lastLoopRunningMS = 0;
+  } else {
+    //C. mower can't go straight
+    stop(500);
+    forwardStartMS = 0;
+
+    reverse(2000);
+
+    if (leftDistance < TURN_LIMIT_CM && rightDistance < TURN_LIMIT_CM) {
+      //no space left or right --> go back
+      reverse(1000);
+    } else if (leftDistance < TURN_LIMIT_CM) {
+      //no space left
+      right(1500);
+    } else if (rightDistance < TURN_LIMIT_CM) {
+      //no space right
+      left(2000);
+    } else {
+      if (random(0, 10) < 5) { //random 0-->9
+        left(2000);
+      } else {
+        right(2000);
+      }
+    }
+
+    stop(500);
+
+    yaw = 0; //reset the angle
+    lastLoopRunningMS = 0; //need for reset the angle
+    firstLockDetectionMS = 0;
   }
+
 
   delay(10);
 }
@@ -405,4 +467,19 @@ boolean canGo() {
   Serial.println(canGo);
 
   return canGo;
+}
+
+void turnOffRobot() {
+  stop(100);
+
+  for (int i = 0; i < 10; i++) {
+    digitalWrite(BUZZER, HIGH);
+    delay(1000);
+    digitalWrite(BUZZER, LOW);
+    delay(1000);
+  }
+
+  while (true && !DISABLE_EMERGENCY_STOP) {
+    //i'm die
+  }
 }

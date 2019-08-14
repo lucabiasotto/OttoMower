@@ -15,7 +15,7 @@ const int RIGHT_RPWM = 11; // +5V right motor forward rotation
 const int MAX_SPEED = 200; //255;
 const int TURN_SPEED = 150;
 
-void stop() {
+void stop(int stopMS) {
   Serial.println("stop");
   digitalWrite(RIGHT_LPWM, LOW);
   digitalWrite(RIGHT_RPWM, LOW);
@@ -23,7 +23,7 @@ void stop() {
   digitalWrite(LEFT_LPWM, LOW);
   digitalWrite(LEFT_RPWM, LOW);
   
-  delay(2000); //give the mower the time for stop
+  delay(stopMS); //give the mower the time for stop
 }
 
 void forward(float currentAngle) {
@@ -74,7 +74,7 @@ void forward(float currentAngle) {
   digitalWrite(LEFT_RPWM, LOW);
 }
 
-void left() {
+void left(int turnMS) {
   Serial.println("left");
   
   analogWrite(RIGHT_LPWM, TURN_SPEED);
@@ -83,10 +83,10 @@ void left() {
   digitalWrite(LEFT_LPWM, LOW);
   analogWrite(LEFT_RPWM, TURN_SPEED);
   
-  delay(1500);
+  delay(turnMS);
 }
 
-void right() {
+void right(int turnMS) {
   Serial.println("right");
   
   digitalWrite(RIGHT_LPWM, LOW);
@@ -96,10 +96,10 @@ void right() {
   digitalWrite(LEFT_RPWM, LOW);
   
 
-  delay(1500);
+  delay(turnMS);
 }
 
-void reverse() {
+void reverse(int reverseMS) {
   Serial.println("forward");
   
   digitalWrite(RIGHT_LPWM, LOW);
@@ -107,6 +107,6 @@ void reverse() {
 
   digitalWrite(LEFT_LPWM, LOW);
   analogWrite(LEFT_RPWM, TURN_SPEED);
-  
-  delay(2000);
+
+  delay(reverseMS);
 }
