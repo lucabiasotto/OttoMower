@@ -32,10 +32,8 @@ float frontDistance;
 float leftDistance;
 float rightDistance;
 
-float forwardStartMS;
-
 long firstLockDetectionMS = 0;
-const float LOCK_ACC_TOLLERANCE = 0.4 ; //0.1 if is very very stopped
+const float LOCK_TOLLERANCE = 3.5; //tiene conto di eventuali vibrazioni, 3 è un po' troppo permissivo
 const int LOCKED_LIMIT_MS = 1000; //if not move for this time try to free the robot
 const int LOCKED_LIMIT_SHUTDOWN_MS = 5000 * 3; //if not move for this time shutdown all
 
@@ -206,7 +204,6 @@ void checkSettings()
 }
 
 
-
 void loop() {
 
   long loopDelay = millis() - lastLoopRunningMS; // i need the loop delay for calculate the correct yaw
@@ -225,9 +222,11 @@ void loop() {
   Vector normAccel = mpu.readNormalizeAccel();
   Vector normGyro = mpu.readNormalizeGyro();
 
-  float startAccX = normAccel.XAxis;
-  float startAccY = normAccel.YAxis;
-  float startAccZ = normAccel.ZAxis;
+  /*
+    float startAccX = normAccel.XAxis;
+    float startAccY = normAccel.YAxis;
+    float startAccZ = normAccel.ZAxis;
+  */
 
   // Calculate Pitch & Roll
   pitch = -(atan2(normAccel.XAxis, sqrt(normAccel.YAxis * normAccel.YAxis + normAccel.ZAxis * normAccel.ZAxis)) * 180.0) / M_PI;
@@ -259,14 +258,16 @@ void loop() {
   Serial.print(yaw);
   Serial.println();
 
+  /*
+    Serial.print("Acc X = ");
+    Serial.print(normAccel.XAxis);
+    Serial.print("\tAcc Y = ");
+    Serial.print(normAccel.YAxis);
+    Serial.print("\tAcc Z = ");
+    Serial.print(normAccel.ZAxis);
+    Serial.println();
+  */
 
-  Serial.print("Acc X = ");
-  Serial.print(normAccel.XAxis);
-  Serial.print("\tAcc Y = ");
-  Serial.print(normAccel.YAxis);
-  Serial.print("\tAcc Z = ");
-  Serial.print(normAccel.ZAxis);
-  Serial.println();
 
 
   /******************************
@@ -278,14 +279,19 @@ void loop() {
 
     tiltCount++;
     //TODO stop() stopBlades;
-    stop(500);
+    int stopMS = 500;
+    stop(stopMS);
     Serial.println("!!!! TILT DETECTED !!!!");
+    firstLockDetectionMS = 0; //when tilted the robot is stopped, i need to reset lock detection
+    if(firstLockDetectionMS > 0){
+      firstLockDetectionMS = firstLockDetectionMS - stopMS;
+    }
   } else {
     tiltCount = 0;
   }
 
 
-  if (tiltCount >= TILT_LIMIT) {
+  if (tiltCount >= TILT_LIMIT && !DISABLE_EMERGENCY_STOP) {
     //robot is in tilt more time consecutively...shoutdown
     //TODO stop() stopBlades;
     stop(1);
@@ -303,7 +309,7 @@ void loop() {
     turnOffRobot();
   }
 
-  if (firstLockDetectionMS > 0 &&  millis() - firstLockDetectionMS > LOCKED_LIMIT_SHUTDOWN_MS) {
+  if (firstLockDetectionMS > 0 &&  millis() - firstLockDetectionMS > LOCKED_LIMIT_SHUTDOWN_MS && !DISABLE_EMERGENCY_STOP) {
     //TODO stop() stopBlades;
     stop(1);
     Serial.println("");
@@ -323,10 +329,6 @@ void loop() {
 
   } else if (canGo()) {
     //B. no obstacle detected mower can go straight
-
-    if (forwardStartMS == 0) {
-      forwardStartMS = millis();
-    }
 
     if (firstLockDetectionMS > 0 && millis() - firstLockDetectionMS > LOCKED_LIMIT_MS) {
       //robot is "impantanato"
@@ -379,26 +381,24 @@ void loop() {
 
 
     //check if robot is locked
-    normAccel = mpu.readNormalizeAccel();
-    float deltaX = startAccX - normAccel.XAxis;
-    float deltaY = startAccY - normAccel.YAxis;
-    float deltaZ = startAccZ - normAccel.ZAxis;
-    deltaX = deltaX < 0 ? -deltaX : deltaX;
-    deltaY = deltaY < 0 ? -deltaY : deltaY;
-    deltaZ = deltaZ < 0 ? -deltaZ : deltaZ;
-
-
-    Serial.print("deltaX = ");
-    Serial.print(deltaX);
-    Serial.print("\tdeltaY = ");
-    Serial.print(deltaY);
-    Serial.print("\tdeltaZ = ");
-    Serial.print(deltaZ);
+    normGyro = mpu.readNormalizeGyro();
+    Serial.print("Gyro X = ");
+    Serial.print(normGyro.XAxis);
+    Serial.print("\tGyro Y = ");
+    Serial.print(normGyro.YAxis);
+    Serial.print("\tGyro Z = ");
+    Serial.print(normGyro.ZAxis);
     Serial.println();
 
+    float gyroX = normGyro.XAxis;
+    float gyroY = normGyro.YAxis;
+    float gyroZ = normGyro.ZAxis;
+    gyroX = gyroX < 0 ? -gyroX : gyroX;
+    gyroY = gyroY < 0 ? -gyroY : gyroY;
+    gyroZ = gyroZ < 0 ? -gyroZ : gyroZ;
 
-    if ((millis() - forwardStartMS > 1000) //wait 1 secondo before get information
-        && deltaX < LOCK_ACC_TOLLERANCE && deltaY < LOCK_ACC_TOLLERANCE && deltaZ < LOCK_ACC_TOLLERANCE) {
+
+    if (gyroX < LOCK_TOLLERANCE && gyroY < LOCK_TOLLERANCE && gyroZ < LOCK_TOLLERANCE) {
       //the robot is locked
       if (firstLockDetectionMS == 0) {
         firstLockDetectionMS = millis();
@@ -415,7 +415,6 @@ void loop() {
   } else {
     //C. mower can't go straight
     stop(500);
-    forwardStartMS = 0;
 
     reverse(2000);
 

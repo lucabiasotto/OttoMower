@@ -30,7 +30,7 @@ float getDistance(int trigPin, int echoPin) {
  */
 int getFrontDistance() {
   float frontDistance = getDistance(US_FRONT_TRIG, US_FRONT_ECHO);
-  Serial.print("frontDistance:");
+  Serial.print("frontDistance: ");
   Serial.println(frontDistance);
   return frontDistance;
 }
@@ -40,7 +40,7 @@ int getFrontDistance() {
  */
 int getLeftDistance() {
   float  leftDistance = getDistance(US_LEFT_TRIG, US_LEFT_ECHO);
-  Serial.print("leftDistance:");
+  Serial.print("leftDistance: ");
   Serial.println(leftDistance);
   return leftDistance;
 }
@@ -50,7 +50,7 @@ int getLeftDistance() {
  */
 int getRightDistance() {
   float rightDistance = getDistance(US_RIGHT_TRIG, US_RIGHT_ECHO);
-  Serial.print("rightDistance:");
+  Serial.print("rightDistance: ");
   Serial.println(rightDistance);
   return rightDistance;
 }
