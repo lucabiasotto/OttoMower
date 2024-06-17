@@ -1,0 +1,850 @@
+Initialize MPU6050
+
+ * Sleep Mode:        Disabled
+ * Clock Source:      PLL with X axis gyroscope reference
+ * Gyroscope:         2000 dps
+ * Gyroscope offsets: 0 / 0 / 0
+
+AFTER RESET
+
+Delay = 1	Pitch = -1	Roll = 3	Yaw = 0.00
+frontDistance: 250.60
+leftDistance: 243.57
+rightDistance: 233.05
+canGo: 1
+forward
+currentAngle = 0.00	rightPower = 200	leftPower = 200
+Gyro X = 0.00	Gyro Y = 0.00	Gyro Z = 0.00
+!!!! LOCK DETECTED !!!!
+
+Delay = 392	Pitch = -7	Roll = 2	Yaw = 358.42
+frontDistance: 247.31
+leftDistance: 244.26
+rightDistance: 212.41
+canGo: 1
+forward
+currentAngle = 1.58	rightPower = 200	leftPower = 156
+Gyro X = -4.72	Gyro Y = 6.49	Gyro Z = -9.80
+
+Delay = 336	Pitch = 1	Roll = 4	Yaw = 355.02
+frontDistance: 248.79
+leftDistance: 245.10
+rightDistance: 48.93
+canGo: 1
+forward
+currentAngle = 4.98	rightPower = 200	leftPower = 150
+Gyro X = 0.00	Gyro Y = 9.91	Gyro Z = 3.31
+
+Delay = 333	Pitch = 2	Roll = 0	Yaw = 355.02
+frontDistance: 247.52
+leftDistance: 30.27
+rightDistance: 25.29
+canGo: 1
+forward
+currentAngle = 4.98	rightPower = 200	leftPower = 150
+Gyro X = 0.00	Gyro Y = 4.60	Gyro Z = 5.20
+
+Delay = 262	Pitch = -2	Roll = 0	Yaw = 355.02
+frontDistance: 247.98
+leftDistance: 213.55
+rightDistance: 68.77
+canGo: 1
+forward
+currentAngle = 4.98	rightPower = 200	leftPower = 150
+Gyro X = -3.08	Gyro Y = 6.13	Gyro Z = 3.49
+
+Delay = 332	Pitch = 1	Roll = 2	Yaw = 355.87
+frontDistance: 247.93
+leftDistance: 245.05
+rightDistance: 96.96
+canGo: 1
+forward
+currentAngle = 4.13	rightPower = 200	leftPower = 152
+Gyro X = 5.28	Gyro Y = -2.16	Gyro Z = 4.10
+
+Delay = 334	Pitch = -2	Roll = 2	Yaw = 358.78
+frontDistance: 248.40
+leftDistance: 245.79
+rightDistance: 105.82
+canGo: 1
+forward
+currentAngle = 1.22	rightPower = 200	leftPower = 157
+Gyro X = -8.56	Gyro Y = 0.00	Gyro Z = 0.00
+
+Delay = 335	Pitch = 0	Roll = 1	Yaw = 1.47
+frontDistance: 247.52
+leftDistance: 244.52
+rightDistance: 110.89
+canGo: 1
+forward
+currentAngle = 1.47	rightPower = 196	leftPower = 200
+Gyro X = -7.16	Gyro Y = 3.02	Gyro Z = 2.58
+
+Delay = 331	Pitch = -1	Roll = 4	Yaw = 2.45
+frontDistance: 248.69
+leftDistance: 27.24
+rightDistance: 98.31
+canGo: 1
+forward
+currentAngle = 2.45	rightPower = 194	leftPower = 200
+Gyro X = 2.47	Gyro Y = -9.54	Gyro Z = 2.94
+
+Delay = 263	Pitch = -1	Roll = 1	Yaw = 3.11
+frontDistance: 248.81
+leftDistance: 219.10
+rightDistance: 155.46
+canGo: 1
+forward
+currentAngle = 3.11	rightPower = 193	leftPower = 200
+Gyro X = 14.79	Gyro Y = -8.26	Gyro Z = 2.52
+
+Delay = 397	Pitch = -3	Roll = 7	Yaw = 359.00
+frontDistance: 247.71
+leftDistance: 244.72
+rightDistance: 61.46
+canGo: 1
+forward
+currentAngle = 1.00	rightPower = 200	leftPower = 157
+Gyro X = -8.50	Gyro Y = 9.36	Gyro Z = -4.31
+
+Delay = 335	Pitch = 2	Roll = 0	Yaw = 359.00
+frontDistance: 247.26
+leftDistance: 245.36
+rightDistance: 263.84
+canGo: 1
+forward
+currentAngle = 1.00	rightPower = 200	leftPower = 157
+Gyro X = -8.56	Gyro Y = 0.00	Gyro Z = 0.00
+
+Delay = 333	Pitch = 0	Roll = 0	Yaw = -0.31
+frontDistance: 247.96
+leftDistance: 244.03
+rightDistance: 102.93
+canGo: 1
+forward
+currentAngle = -0.31	rightPower = 200	leftPower = 200
+Gyro X = 3.20	Gyro Y = 4.91	Gyro Z = 3.74
+
+Delay = 333	Pitch = -1	Roll = 1	Yaw = 0.88
+frontDistance: 248.59
+leftDistance: 245.41
+rightDistance: 100.37
+canGo: 1
+forward
+currentAngle = 0.88	rightPower = 198	leftPower = 200
+Gyro X = -12.34	Gyro Y = -9.48	Gyro Z = 0.00
+
+Delay = 335	Pitch = 0	Roll = -1	Yaw = 2.78
+frontDistance: 247.10
+leftDistance: 244.07
+rightDistance: 88.53
+canGo: 1
+forward
+currentAngle = 2.78	rightPower = 193	leftPower = 200
+Gyro X = 11.01	Gyro Y = 19.12	Gyro Z = 2.03
+
+Delay = 334	Pitch = 2	Roll = 1	Yaw = 6.60
+frontDistance: 246.86
+leftDistance: 245.43
+rightDistance: 100.58
+canGo: 1
+forward
+currentAngle = 6.60	rightPower = 185	leftPower = 200
+Gyro X = 0.00	Gyro Y = -2.23	Gyro Z = 4.47
+
+Delay = 332	Pitch = -1	Roll = 2	Yaw = 5.71
+frontDistance: 248.40
+leftDistance: 26.17
+rightDistance: 207.19
+canGo: 1
+forward
+currentAngle = 5.71	rightPower = 187	leftPower = 200
+Gyro X = 14.42	Gyro Y = 0.00	Gyro Z = 3.00
+
+Delay = 310	Pitch = 1	Roll = 4	Yaw = 5.71
+frontDistance: 313.22
+leftDistance: 28.94
+rightDistance: 232.09
+canGo: 1
+forward
+currentAngle = 5.71	rightPower = 187	leftPower = 200
+Gyro X = -4.48	Gyro Y = 3.26	Gyro Z = 0.00
+
+Delay = 262	Pitch = 2	Roll = 2	Yaw = 7.07
+frontDistance: 194.15
+leftDistance: 27.51
+rightDistance: 235.96
+canGo: 1
+forward
+currentAngle = 7.07	rightPower = 184	leftPower = 200
+Gyro X = 11.44	Gyro Y = -2.47	Gyro Z = 3.67
+
+Delay = 309	Pitch = -3	Roll = 4	Yaw = 6.31
+frontDistance: 248.81
+leftDistance: 163.74
+rightDistance: 134.96
+canGo: 1
+forward
+currentAngle = 6.31	rightPower = 185	leftPower = 200
+Gyro X = 3.57	Gyro Y = -5.34	Gyro Z = 6.91
+
+Delay = 328	Pitch = -1	Roll = 0	Yaw = 8.69
+frontDistance: 248.84
+leftDistance: 244.38
+rightDistance: 117.36
+canGo: 1
+forward
+currentAngle = 8.69	rightPower = 180	leftPower = 200
+Gyro X = 0.00	Gyro Y = -11.07	Gyro Z = -5.78
+
+Delay = 336	Pitch = -8	Roll = 4	Yaw = 5.89
+frontDistance: 249.52
+leftDistance: 245.60
+rightDistance: 116.62
+canGo: 1
+forward
+currentAngle = 5.89	rightPower = 186	leftPower = 200
+Gyro X = 6.07	Gyro Y = 11.19	Gyro Z = 3.98
+
+Delay = 333	Pitch = 0	Roll = 4	Yaw = 5.89
+frontDistance: -164.73
+leftDistance: 239.81
+rightDistance: 123.44
+canGo: 1
+forward
+currentAngle = 5.89	rightPower = 186	leftPower = 200
+Gyro X = -17.28	Gyro Y = -17.65	Gyro Z = 3.80
+
+Delay = 272	Pitch = -1	Roll = -4	Yaw = 6.69
+frontDistance: 191.24
+leftDistance: 244.67
+rightDistance: 40.15
+canGo: 1
+forward
+currentAngle = 6.69	rightPower = 185	leftPower = 200
+Gyro X = 9.61	Gyro Y = 6.31	Gyro Z = 3.74
+
+Delay = 329	Pitch = 0	Roll = 0	Yaw = 9.38
+frontDistance: 247.67
+leftDistance: 39.03
+rightDistance: 120.37
+canGo: 1
+forward
+currentAngle = 9.38	rightPower = 179	leftPower = 200
+Gyro X = 0.00	Gyro Y = 4.91	Gyro Z = 0.00
+
+Delay = 261	Pitch = -1	Roll = -1	Yaw = 9.38
+frontDistance: 248.62
+leftDistance: 51.50
+rightDistance: 47.44
+canGo: 1
+forward
+currentAngle = 9.38	rightPower = 179	leftPower = 200
+Gyro X = 5.22	Gyro Y = -4.91	Gyro Z = 0.00
+
+Delay = 264	Pitch = 3	Roll = 1	Yaw = 8.67
+frontDistance: 248.71
+leftDistance: 118.79
+rightDistance: 113.74
+canGo: 1
+forward
+currentAngle = 8.67	rightPower = 180	leftPower = 200
+Gyro X = 6.86	Gyro Y = -5.09	Gyro Z = 2.15
+
+Delay = 264	Pitch = 0	Roll = 4	Yaw = 7.95
+frontDistance: 247.96
+leftDistance: 23.77
+rightDistance: 137.25
+canGo: 1
+forward
+currentAngle = 7.95	rightPower = 182	leftPower = 200
+Gyro X = -7.77	Gyro Y = -7.10	Gyro Z = 0.00
+
+Delay = 263	Pitch = 2	Roll = -5	Yaw = 7.95
+frontDistance: 247.93
+leftDistance: 74.91
+rightDistance: 120.08
+canGo: 1
+forward
+currentAngle = 7.95	rightPower = 182	leftPower = 200
+Gyro X = -14.60	Gyro Y = -15.58	Gyro Z = 16.24
+
+Delay = 269	Pitch = -1	Roll = -3	Yaw = 7.95
+frontDistance: 247.74
+leftDistance: 123.25
+rightDistance: 195.65
+canGo: 1
+forward
+currentAngle = 7.95	rightPower = 182	leftPower = 200
+Gyro X = -4.66	Gyro Y = -1.98	Gyro Z = -3.15
+
+Delay = 318	Pitch = -2	Roll = 0	Yaw = 7.14
+frontDistance: 248.38
+leftDistance: 62.82
+rightDistance: 237.03
+canGo: 1
+forward
+currentAngle = 7.14	rightPower = 184	leftPower = 200
+Gyro X = 4.61	Gyro Y = -7.35	Gyro Z = 0.00
+
+Delay = 315	Pitch = -1	Roll = -1	Yaw = 7.14
+frontDistance: 248.09
+leftDistance: 45.98
+rightDistance: 237.03
+canGo: 1
+forward
+currentAngle = 7.14	rightPower = 184	leftPower = 200
+Gyro X = -12.77	Gyro Y = -8.75	Gyro Z = 3.55
+
+Delay = 317	Pitch = -4	Roll = -4	Yaw = 7.14
+frontDistance: 246.62
+leftDistance: 37.50
+rightDistance: 235.43
+canGo: 1
+forward
+currentAngle = 7.14	rightPower = 184	leftPower = 200
+Gyro X = -1.92	Gyro Y = -10.21	Gyro Z = 6.11
+
+Delay = 315	Pitch = -5	Roll = -19	Yaw = 10.17
+stop
+!!!! TILT DETECTED !!!!
+
+Delay = 558	Pitch = -1	Roll = 0	Yaw = 10.17
+frontDistance: 248.50
+leftDistance: 28.48
+rightDistance: 231.64
+canGo: 1
+forward
+currentAngle = 10.17	rightPower = 177	leftPower = 200
+Gyro X = 0.00	Gyro Y = 0.00	Gyro Z = 0.00
+!!!! LOCK DETECTED !!!!
+
+Delay = 304	Pitch = -6	Roll = 2	Yaw = 10.17
+frontDistance: 247.36
+leftDistance: 77.51
+rightDistance: 67.03
+canGo: 1
+forward
+currentAngle = 10.17	rightPower = 177	leftPower = 200
+Gyro X = 3.20	Gyro Y = 12.84	Gyro Z = -8.64
+
+Delay = 266	Pitch = 0	Roll = 3	Yaw = 6.70
+frontDistance: 247.65
+leftDistance: 21.87
+rightDistance: 169.03
+canGo: 1
+forward
+currentAngle = 6.70	rightPower = 185	leftPower = 200
+Gyro X = 18.26	Gyro Y = 11.07	Gyro Z = 0.00
+
+Delay = 308	Pitch = -2	Roll = 7	Yaw = 5.20
+frontDistance: 247.05
+leftDistance: 18.27
+rightDistance: 54.96
+canGo: 1
+<-- LEFT DODGE
+forward
+currentAngle = 45.00	rightPower = 100	leftPower = 200
+Gyro X = -18.56	Gyro Y = 14.05	Gyro Z = -9.86
+
+Delay = 284	Pitch = 6	Roll = -5	Yaw = 6.41
+frontDistance: 247.45
+leftDistance: 16.00
+rightDistance: 185.15
+canGo: 1
+<-- LEFT DODGE
+forward
+currentAngle = 45.00	rightPower = 100	leftPower = 200
+Gyro X = 0.00	Gyro Y = -3.63	Gyro Z = -14.62
+
+Delay = 328	Pitch = -1	Roll = 1	Yaw = 359.40
+frontDistance: 248.93
+leftDistance: 17.74
+rightDistance: 240.60
+canGo: 1
+<-- LEFT DODGE
+forward
+currentAngle = 45.00	rightPower = 100	leftPower = 200
+Gyro X = 9.18	Gyro Y = 7.84	Gyro Z = -19.13
+
+Delay = 333	Pitch = 2	Roll = 1	Yaw = 350.16
+frontDistance: 247.64
+leftDistance: 69.96
+rightDistance: 241.15
+canGo: 1
+forward
+currentAngle = 9.84	rightPower = 200	leftPower = 142
+Gyro X = 3.45	Gyro Y = -34.36	Gyro Z = -22.61
+
+Delay = 320	Pitch = 2	Roll = 6	Yaw = 342.66
+frontDistance: 250.15
+leftDistance: 31.32
+rightDistance: 111.24
+canGo: 1
+forward
+currentAngle = 17.34	rightPower = 200	leftPower = 128
+Gyro X = -4.72	Gyro Y = 0.00	Gyro Z = -8.95
+
+Delay = 266	Pitch = -1	Roll = 0	Yaw = 340.88
+frontDistance: 250.43
+leftDistance: 30.58
+rightDistance: 121.93
+canGo: 1
+forward
+currentAngle = 19.12	rightPower = 200	leftPower = 125
+Gyro X = 0.00	Gyro Y = 4.48	Gyro Z = 3.06
+
+Delay = 266	Pitch = 3	Roll = 2	Yaw = 342.51
+frontDistance: 249.26
+leftDistance: 63.63
+rightDistance: 41.50
+canGo: 1
+forward
+currentAngle = 17.49	rightPower = 200	leftPower = 128
+Gyro X = 9.48	Gyro Y = -11.62	Gyro Z = 7.94
+
+Delay = 266	Pitch = 2	Roll = -1	Yaw = 345.79
+frontDistance: 249.03
+leftDistance: 65.89
+rightDistance: 107.48
+canGo: 1
+forward
+currentAngle = 14.21	rightPower = 200	leftPower = 134
+Gyro X = 0.00	Gyro Y = -25.82	Gyro Z = 14.41
+
+Delay = 269	Pitch = 2	Roll = 6	Yaw = 349.31
+frontDistance: 250.41
+leftDistance: 47.91
+rightDistance: 60.44
+canGo: 1
+forward
+currentAngle = 10.69	rightPower = 200	leftPower = 140
+Gyro X = 4.36	Gyro Y = 3.69	Gyro Z = 15.63
+
+Delay = 265	Pitch = 0	Roll = 0	Yaw = 355.31
+frontDistance: 249.05
+leftDistance: 40.75
+rightDistance: 44.53
+canGo: 1
+forward
+currentAngle = 4.69	rightPower = 200	leftPower = 151
+Gyro X = -6.86	Gyro Y = 1.98	Gyro Z = 14.28
+
+Delay = 265	Pitch = -1	Roll = 7	Yaw = 2.25
+frontDistance: 250.28
+leftDistance: 43.58
+rightDistance: 170.26
+canGo: 1
+forward
+currentAngle = 2.25	rightPower = 195	leftPower = 200
+Gyro X = -8.75	Gyro Y = 14.85	Gyro Z = 21.42
+
+Delay = 311	Pitch = 2	Roll = 1	Yaw = 8.70
+frontDistance: 248.10
+leftDistance: 68.15
+rightDistance: 235.33
+canGo: 1
+forward
+currentAngle = 8.70	rightPower = 180	leftPower = 200
+Gyro X = -8.20	Gyro Y = -4.18	Gyro Z = 13.74
+
+Delay = 317	Pitch = -1	Roll = 5	Yaw = 10.94
+frontDistance: 249.53
+leftDistance: 54.84
+rightDistance: 235.59
+canGo: 1
+forward
+currentAngle = 10.94	rightPower = 175	leftPower = 200
+Gyro X = 3.45	Gyro Y = 4.85	Gyro Z = 9.04
+
+Delay = 315	Pitch = -2	Roll = 6	Yaw = 15.41
+frontDistance: 249.59
+leftDistance: 184.07
+rightDistance: 49.81
+canGo: 1
+forward
+currentAngle = 15.41	rightPower = 165	leftPower = 200
+Gyro X = -14.72	Gyro Y = 0.00	Gyro Z = -3.64
+
+Delay = 332	Pitch = 0	Roll = 1	Yaw = 18.41
+frontDistance: 249.26
+leftDistance: 70.96
+rightDistance: 186.19
+canGo: 1
+forward
+currentAngle = 18.41	rightPower = 159	leftPower = 200
+Gyro X = 1.98	Gyro Y = -4.36	Gyro Z = 0.00
+
+Delay = 313	Pitch = -4	Roll = 2	Yaw = 19.08
+frontDistance: 249.50
+leftDistance: 69.01
+rightDistance: 26.94
+canGo: 1
+forward
+currentAngle = 19.08	rightPower = 157	leftPower = 200
+Gyro X = -27.95	Gyro Y = -5.34	Gyro Z = -7.79
+
+Delay = 269	Pitch = 0	Roll = -8	Yaw = 22.00
+frontDistance: 248.86
+leftDistance: 86.08
+rightDistance: 209.45
+canGo: 1
+forward
+currentAngle = 22.00	rightPower = 151	leftPower = 200
+Gyro X = -14.54	Gyro Y = 11.92	Gyro Z = -16.02
+
+Delay = 320	Pitch = -6	Roll = 0	Yaw = 18.93
+frontDistance: 247.22
+leftDistance: 185.96
+rightDistance: 165.20
+canGo: 1
+forward
+currentAngle = 18.93	rightPower = 157	leftPower = 200
+Gyro X = 0.00	Gyro Y = 4.91	Gyro Z = -11.26
+
+Delay = 268	Pitch = 0	Roll = 2	Yaw = 14.34
+frontDistance: 247.95
+leftDistance: 179.67
+rightDistance: 57.10
+canGo: 1
+forward
+currentAngle = 14.34	rightPower = 168	leftPower = 200
+Gyro X = 6.13	Gyro Y = -4.79	Gyro Z = -12.73
+
+Delay = 331	Pitch = -6	Roll = 3	Yaw = 8.66
+frontDistance: 248.76
+leftDistance: 244.36
+rightDistance: 146.53
+canGo: 1
+forward
+currentAngle = 8.66	rightPower = 180	leftPower = 200
+Gyro X = -4.36	Gyro Y = 0.00	Gyro Z = -13.46
+
+Delay = 335	Pitch = 0	Roll = 4	Yaw = 6.26
+frontDistance: 248.21
+leftDistance: 244.78
+rightDistance: 139.25
+canGo: 1
+forward
+currentAngle = 6.26	rightPower = 186	leftPower = 200
+Gyro X = 4.42	Gyro Y = -15.46	Gyro Z = -7.85
+
+Delay = 334	Pitch = -3	Roll = 3	Yaw = 358.95
+frontDistance: 247.10
+leftDistance: 245.22
+rightDistance: 130.43
+canGo: 1
+forward
+currentAngle = 1.05	rightPower = 200	leftPower = 157
+Gyro X = -9.05	Gyro Y = 8.32	Gyro Z = -13.95
+
+Delay = 338	Pitch = -3	Roll = 2	Yaw = 355.42
+frontDistance: 248.43
+leftDistance: 243.62
+rightDistance: 122.24
+canGo: 1
+forward
+currentAngle = 4.58	rightPower = 200	leftPower = 151
+Gyro X = -2.10	Gyro Y = 2.04	Gyro Z = 3.00
+
+Delay = 335	Pitch = 3	Roll = 1	Yaw = -0.67
+frontDistance: 248.28
+leftDistance: 244.74
+rightDistance: 120.12
+canGo: 1
+forward
+currentAngle = -0.67	rightPower = 201	leftPower = 200
+Gyro X = -4.78	Gyro Y = 14.42	Gyro Z = 5.75
+
+Delay = 334	Pitch = -2	Roll = 1	Yaw = 2.36
+frontDistance: 247.72
+leftDistance: 245.36
+rightDistance: 128.46
+canGo: 1
+forward
+currentAngle = 2.36	rightPower = 194	leftPower = 200
+Gyro X = 4.85	Gyro Y = 12.29	Gyro Z = 7.88
+
+Delay = 333	Pitch = 4	Roll = 3	Yaw = 4.76
+frontDistance: 248.22
+leftDistance: 52.79
+rightDistance: 123.24
+canGo: 1
+forward
+currentAngle = 4.76	rightPower = 189	leftPower = 200
+Gyro X = -5.70	Gyro Y = -3.81	Gyro Z = 5.75
+
+Delay = 264	Pitch = 6	Roll = 3	Yaw = 6.88
+frontDistance: 247.98
+leftDistance: 13.65
+rightDistance: 131.58
+canGo: 1
+<-- LEFT DODGE
+forward
+currentAngle = 45.00	rightPower = 100	leftPower = 200
+Gyro X = 4.55	Gyro Y = 6.01	Gyro Z = 8.19
+
+Delay = 280	Pitch = 6	Roll = 4	Yaw = 9.61
+frontDistance: 249.48
+leftDistance: 177.24
+rightDistance: 181.17
+canGo: 1
+forward
+currentAngle = 9.61	rightPower = 178	leftPower = 200
+Gyro X = 8.75	Gyro Y = 11.68	Gyro Z = -7.00
+
+Delay = 394	Pitch = 1	Roll = 6	Yaw = 4.49
+frontDistance: 251.40
+leftDistance: 246.53
+rightDistance: 82.17
+canGo: 1
+forward
+currentAngle = 4.49	rightPower = 190	leftPower = 200
+Gyro X = -4.17	Gyro Y = 12.23	Gyro Z = -2.48
+
+Delay = 333	Pitch = 4	Roll = 5	Yaw = 2.39
+frontDistance: 250.93
+leftDistance: 247.71
+rightDistance: 155.67
+canGo: 1
+forward
+currentAngle = 2.39	rightPower = 194	leftPower = 200
+Gyro X = -8.14	Gyro Y = -3.32	Gyro Z = 0.00
+
+Delay = 397	Pitch = 0	Roll = 0	Yaw = 4.19
+frontDistance: 250.71
+leftDistance: 246.15
+rightDistance: 235.90
+canGo: 1
+forward
+currentAngle = 4.19	rightPower = 190	leftPower = 200
+Gyro X = -4.17	Gyro Y = -19.18	Gyro Z = 1.97
+
+Delay = 404	Pitch = 0	Roll = -2	Yaw = 4.19
+frontDistance: 249.67
+leftDistance: 245.67
+rightDistance: 237.46
+canGo: 1
+forward
+currentAngle = 4.19	rightPower = 190	leftPower = 200
+Gyro X = -5.94	Gyro Y = 9.73	Gyro Z = 0.00
+
+Delay = 401	Pitch = 3	Roll = 0	Yaw = 9.20
+frontDistance: 250.59
+leftDistance: 246.71
+rightDistance: 205.10
+canGo: 1
+forward
+currentAngle = 9.20	rightPower = 179	leftPower = 200
+Gyro X = 6.07	Gyro Y = 7.77	Gyro Z = 2.39
+
+Delay = 332	Pitch = 0	Roll = 5	Yaw = 9.92
+frontDistance: 249.29
+leftDistance: 247.14
+rightDistance: 165.93
+canGo: 1
+forward
+currentAngle = 9.92	rightPower = 177	leftPower = 200
+Gyro X = -5.52	Gyro Y = 15.46	Gyro Z = 0.00
+
+Delay = 333	Pitch = 4	Roll = 0	Yaw = 9.27
+frontDistance: 190.58
+leftDistance: 240.09
+rightDistance: 159.67
+canGo: 1
+forward
+currentAngle = 9.27	rightPower = 179	leftPower = 200
+Gyro X = 9.48	Gyro Y = -2.04	Gyro Z = 2.82
+
+Delay = 263	Pitch = 5	Roll = 1	Yaw = 10.94
+frontDistance: 162.91
+leftDistance: 239.65
+rightDistance: 128.36
+canGo: 1
+forward
+currentAngle = 10.94	rightPower = 175	leftPower = 200
+Gyro X = -20.33	Gyro Y = -5.09	Gyro Z = -5.35
+
+Delay = 268	Pitch = 0	Roll = 0	Yaw = 12.13
+frontDistance: 151.82
+leftDistance: 239.95
+rightDistance: 40.08
+canGo: 1
+forward
+currentAngle = 12.13	rightPower = 173	leftPower = 200
+Gyro X = -7.77	Gyro Y = -14.79	Gyro Z = 0.00
+
+Delay = 267	Pitch = -3	Roll = 1	Yaw = 12.88
+frontDistance: 129.25
+leftDistance: 240.72
+rightDistance: 99.34
+canGo: 1
+forward
+currentAngle = 12.88	rightPower = 171	leftPower = 200
+Gyro X = -10.45	Gyro Y = -3.75	Gyro Z = 0.00
+
+Delay = 268	Pitch = 2	Roll = 0	Yaw = 14.35
+frontDistance: 123.89
+leftDistance: 241.59
+rightDistance: 39.51
+canGo: 1
+forward
+currentAngle = 14.35	rightPower = 168	leftPower = 200
+Gyro X = 7.78	Gyro Y = 6.98	Gyro Z = 3.49
+
+Delay = 263	Pitch = 3	Roll = 3	Yaw = 15.33
+frontDistance: 109.74
+leftDistance: 240.10
+rightDistance: 78.05
+canGo: 1
+forward
+currentAngle = 15.33	rightPower = 165	leftPower = 200
+Gyro X = 7.90	Gyro Y = -15.21	Gyro Z = 0.00
+
+Delay = 265	Pitch = 4	Roll = 3	Yaw = 14.32
+frontDistance: 249.98
+leftDistance: 245.36
+rightDistance: 51.39
+canGo: 1
+forward
+currentAngle = 14.32	rightPower = 168	leftPower = 200
+Gyro X = 5.09	Gyro Y = -13.38	Gyro Z = 0.00
+
+Delay = 334	Pitch = 1	Roll = 7	Yaw = 11.86
+frontDistance: 248.31
+leftDistance: 245.31
+rightDistance: 28.39
+canGo: 1
+forward
+currentAngle = 11.86	rightPower = 173	leftPower = 200
+Gyro X = -23.32	Gyro Y = -6.37	Gyro Z = -6.45
+
+Delay = 337	Pitch = 3	Roll = 1	Yaw = 9.74
+frontDistance: 247.96
+leftDistance: 243.74
+rightDistance: 69.50
+canGo: 1
+forward
+currentAngle = 9.74	rightPower = 178	leftPower = 200
+Gyro X = 9.97	Gyro Y = -2.90	Gyro Z = -3.89
+
+Delay = 332	Pitch = 2	Roll = 2	Yaw = 9.74
+frontDistance: 143.00
+leftDistance: 240.15
+rightDistance: 43.48
+canGo: 1
+forward
+currentAngle = 9.74	rightPower = 178	leftPower = 200
+Gyro X = 19.97	Gyro Y = -2.84	Gyro Z = -4.25
+
+Delay = 264	Pitch = 1	Roll = 9	Yaw = 9.09
+frontDistance: 4.22
+leftDistance: 25.22
+rightDistance: 41.96
+canGo: 0
+stop
+forward
+forward
+stop
+
+Delay = 1	Pitch = 1	Roll = 5	Yaw = 0.00
+frontDistance: 135.56
+leftDistance: 218.28
+rightDistance: 44.00
+canGo: 1
+forward
+currentAngle = 0.00	rightPower = 200	leftPower = 200
+Gyro X = 0.00	Gyro Y = 0.00	Gyro Z = 0.00
+!!!! LOCK DETECTED !!!!
+
+Delay = 237	Pitch = -3	Roll = 3	Yaw = 359.20
+frontDistance: 228.15
+leftDistance: 244.98
+rightDistance: 101.13
+canGo: 1
+forward
+currentAngle = 0.80	rightPower = 200	leftPower = 158
+Gyro X = -8.93	Gyro Y = 2.04	Gyro Z = -6.08
+
+Delay = 335	Pitch = -5	Roll = 1	Yaw = 350.82
+frontDistance: 247.88
+leftDistance: 245.38
+rightDistance: 40.84
+canGo: 1
+forward
+currentAngle = 9.18	rightPower = 200	leftPower = 143
+Gyro X = 0.00	Gyro Y = 9.30	Gyro Z = -11.45
+
+Delay = 336	Pitch = 1	Roll = 3	Yaw = 344.58
+frontDistance: 248.60
+leftDistance: 246.14
+rightDistance: 79.58
+canGo: 1
+forward
+currentAngle = 15.42	rightPower = 200	leftPower = 132
+Gyro X = 2.41	Gyro Y = -4.91	Gyro Z = 2.82
+
+Delay = 334	Pitch = -3	Roll = 2	Yaw = 348.49
+frontDistance: 178.48
+leftDistance: 244.64
+rightDistance: 56.32
+canGo: 1
+forward
+currentAngle = 11.51	rightPower = 200	leftPower = 139
+Gyro X = 11.44	Gyro Y = -5.52	Gyro Z = 6.66
+
+Delay = 332	Pitch = 6	Roll = 0	Yaw = 350.47
+frontDistance: 76.03
+leftDistance: 239.84
+rightDistance: 104.67
+canGo: 1
+forward
+currentAngle = 9.53	rightPower = 200	leftPower = 142
+Gyro X = -10.64	Gyro Y = 16.19	Gyro Z = 9.04
+
+Delay = 266	Pitch = 3	Roll = 5	Yaw = 352.16
+frontDistance: 18.79
+leftDistance: 241.29
+rightDistance: 7.36
+canGo: 0
+stop
+forward
+left
+stop
+
+Delay = 1	Pitch = -3	Roll = 5	Yaw = 0.00
+frontDistance: 178.69
+leftDistance: 245.93
+rightDistance: 56.67
+canGo: 1
+forward
+currentAngle = 0.00	rightPower = 200	leftPower = 200
+Gyro X = 0.00	Gyro Y = 0.00	Gyro Z = 0.00
+!!!! LOCK DETECTED !!!!
+
+Delay = 318	Pitch = -14	Roll = 4	Yaw = 359.17
+stop
+!!!! TILT DETECTED !!!!
+
+Delay = 558	Pitch = -3	Roll = 5	Yaw = -0.83
+frontDistance: 249.38
+leftDistance: 244.60
+rightDistance: 109.41
+canGo: 1
+forward
+currentAngle = -0.83	rightPower = 201	leftPower = 200
+Gyro X = 0.00	Gyro Y = 0.00	Gyro Z = 0.00
+!!!! LOCK DETECTED !!!!
+
+Delay = 324	Pitch = -14	Roll = 1	Yaw = 358.49
+stop
+!!!! TILT DETECTED !!!!
+
+Delay = 557	Pitch = -3	Roll = 4	Yaw = 358.49
+frontDistance: 248.90
+leftDistance: 48.29
+rightDistance: 105.53
+canGo: 1
+--> LOCK DODGE <--
+stop
+forward
